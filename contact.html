@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+
+    <h1>Contact Form</h1>
+    
+    <form method="post" action="submit.php" novalidate id="form">
+
+        <label>
+            Name:
+            <input type="text" id="name" name="name">
+            <div id="name-error"></div>
+        </label>
+
+        <br>
+
+        <label>
+            Email: 
+            <input type="email" id="email" name="email">
+            <div id="email-error"></div>
+        </label>
+
+        <br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <script>
+
+        // Add validation
+        // Mame can't be blank
+        // Email can't be blank, must be a valid email address
+
+        let form = document.getElementById('form');
+        let name = document.getElementById('name');
+        let nameError = document.getElementById("name-error");
+        let email = document.getElementById("email");
+        let emailError = document.getElementById("email-error");
+
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        form.addEventListener("submit", function(e){
+
+            let error = 0;
+
+            if(!name.value)
+            {
+                nameError.innerHTML = "Please enter a name";                
+                error ++;
+            }
+            else
+            {
+                nameError.innerHTML = "";
+            }
+
+            if(!email.value)
+            {
+                emailError.innerHTML = "Please enter an email address";
+                error ++;
+            }
+            else if(!pattern.test(email.value))
+            {
+                emailError.innerHTML = "Please enter a valid email address";
+                error ++;
+            }
+            else
+            {
+                emailError.innerHTML = "";
+            }
+
+            if(error > 0)
+            {
+                e.preventDefault();
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
